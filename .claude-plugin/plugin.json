@@ -1,0 +1,19 @@
+{
+  "name": "claude-music",
+  "version": "0.1.0",
+  "description": "Control Apple Music and play the Claude live stream from inside Claude Code. /music play, pause, skip, search, and more.",
+  "author": {
+    "name": "Prajwal P",
+    "url": "https://github.com/prajwalgajakesari"
+  },
+  "homepage": "https://github.com/prajwalgajakesari/claude-music",
+  "repository": "https://github.com/prajwalgajakesari/claude-music",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "plugin",
+    "music",
+    "apple-music",
+    "macos"
+  ]
+}
