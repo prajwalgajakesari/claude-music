@@ -1,6 +1,6 @@
 ---
 description: Control Apple Music or play the Claude live coding stream
-argument-hint: [play | pause | skip | back | now | up | down | random | claude | <playlist or search>]
+argument-hint: [play | pause | skip | back | now | up | down | random | claude | lofi | coding | <playlist or search>]
 allowed-tools: Bash(osascript:*), Bash(open:*), Bash(python3:*)
 ---
 
@@ -93,12 +93,41 @@ osascript -e 'tell application "Music" to play (some track of library playlist 1
 ```
 Reply: `🎲 <track> — <artist>`.
 
-### `claude` or `live`
-Open the Claude live coding stream:
+### Stream shortcut — `claude` (Claude FM), `lofi`, `coding`, `jazz`, or any user-defined shortcut
+
+Before treating the argument as a playlist or search, check whether it's a configured stream shortcut. Lookup order:
+
+1. User config: `~/.config/claude-music/streams.conf` — lines like `name=url`
+2. Built-in defaults: `claude` (Claude FM), `live`, `lofi`, `coding`, `jazz`
+
+Run:
 ```bash
-open "https://www.youtube.com/watch?v=AUQKjgKQF7w"
+ARG="$ARGUMENTS"
+CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/claude-music/streams.conf"
+URL=""
+LABEL="$ARG"
+
+if [ -f "$CONFIG" ]; then
+  URL=$(grep -E "^${ARG}=" "$CONFIG" 2>/dev/null | head -1 | cut -d= -f2-)
+fi
+
+if [ -z "$URL" ]; then
+  case "$ARG" in
+    claude|live) URL="https://www.youtube.com/watch?v=AUQKjgKQF7w"; LABEL="Claude FM" ;;
+    lofi)        URL="https://www.youtube.com/watch?v=jfKfPfyJRdk"; LABEL="Lofi Girl" ;;
+    coding)      URL="https://www.youtube.com/watch?v=4xDzrJKXOOY"; LABEL="synthwave / coding radio" ;;
+    jazz)        URL="https://www.youtube.com/watch?v=Dx5qFachd3A"; LABEL="jazz radio" ;;
+  esac
+fi
+
+if [ -n "$URL" ]; then
+  open "$URL"
+  printf '📺 %s → %s\n' "$LABEL" "$URL"
+fi
 ```
-Reply: `📺 Opening Claude live stream — https://youtu.be/AUQKjgKQF7w`
+
+If `$URL` was non-empty, **stop here** and reply with the printed line (e.g. `📺 Claude FM → https://...`).
+If `$URL` was empty, the argument isn't a stream shortcut — fall through to the next branch.
 
 ### Anything else — try playlist first, then search
 

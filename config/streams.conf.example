@@ -1,0 +1,20 @@
+# claude-music — stream shortcuts
+#
+# Copy this file to ~/.config/claude-music/streams.conf to customize.
+# Format: name=url
+# Run as: /music <name>
+#
+# Anything you set here overrides the built-in defaults below.
+# Anything you add becomes a new /music shortcut.
+
+# ─── built-in defaults (override or remove as you like) ────────────────────────
+claude=https://www.youtube.com/watch?v=AUQKjgKQF7w
+lofi=https://www.youtube.com/watch?v=jfKfPfyJRdk
+coding=https://www.youtube.com/watch?v=4xDzrJKXOOY
+jazz=https://www.youtube.com/watch?v=Dx5qFachd3A
+
+# ─── add your own ─────────────────────────────────────────────────────────────
+# study=https://www.youtube.com/watch?v=bP9gMpl1gyQ
+# rain=https://www.youtube.com/watch?v=mPZkdNFkNps
+# piano=https://www.youtube.com/watch?v=4oStw0r33so
+# synthwave=https://www.youtube.com/watch?v=MVPTGNGiI-4

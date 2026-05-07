@@ -5,7 +5,7 @@
 
 <!-- ─────────────────────────────────  TYPING SVG  ─────────────────────────── -->
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=22&duration=2400&pause=700&color=A855F7&center=true&vCenter=true&width=620&lines=%2Fmusic+claude;%2Fmusic+pause;%2Fmusic+up;%2Fmusic+down;%2Fmusic+%E2%9D%A4+ar+rahman;%2Fmusic+%E2%80%94+just+vibes." alt="typing animation showing /music commands" />
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=22&duration=2400&pause=700&color=A855F7&center=true&vCenter=true&width=620&lines=%2Fmusic+claude+%E2%86%92+Claude+FM;%2Fmusic+lofi;%2Fmusic+pause;%2Fmusic+up;%2Fmusic+%E2%9D%A4+queen;%2Fmusic+%E2%80%94+just+vibes." alt="typing animation showing /music commands" />
 </p>
 
 <p align="center">
@@ -26,9 +26,22 @@ Look. I love Claude. I work with Claude all day. But every time the queue ran ou
 
 — I died a little inside. I don't want a tutorial. I want a song.
 
-So I made `/music`. Now Claude *can* play music. And pause it. And bump the volume. And open its own live coding stream on YouTube while we both work.
+So I made `/music`. Now Claude *can* play music. And pause it. And bump the volume. And tune into **Claude FM** — a 24/7 Claude live coding stream — so you and Claude can rock out to the same beat while you work.
 
 Yes, it's mostly AppleScript duct-taped to a slash command. No, I don't care. **It works.** ✨
+
+---
+
+## 🎙️ Claude FM
+
+`/music claude` opens **Claude FM** — a live YouTube stream that plays in your browser while you and Claude grind together. It's the only command in here that's pointed at Claude specifically, and it ships pre-configured. Type the command, vibe with the agent.
+
+```text
+$ /music claude
+📺 Claude FM → https://www.youtube.com/watch?v=AUQKjgKQF7w
+```
+
+Don't like the default stream? Point `/music claude` (or any other shortcut) to whatever you want — see [**Configure your own streams**](#-configure-your-own-streams) below.
 
 ---
 
@@ -44,12 +57,15 @@ Yes, it's mostly AppleScript duct-taped to a slash command. No, I don't care. **
 /music up             🔊  +10 volume
 /music down           🔉  −10 volume
 /music random         🎲  surprise me
-/music claude         📺  open the Claude live coding stream
+/music claude         🎙️  open Claude FM
+/music lofi           📺  open Lofi Girl 24/7
+/music coding         📺  open synthwave / coding radio
+/music jazz           📺  open jazz radio
 /music <playlist>     📃  play a playlist by name (case-insensitive)
 /music <anything>     🔍  ...or search Apple Music if no playlist matches
 ```
 
-Yes that last one is "play any playlist OR search if it doesn't exist". `/music focus`, `/music chill`, `/music roadtrip` — if you have a playlist by that name, it plays. If not, it searches.
+That last line: `/music focus`, `/music chill`, `/music roadtrip` — if you have a playlist by that name in Apple Music, it plays. If not, it searches.
 
 ---
 
@@ -59,23 +75,30 @@ When you've been heads-down for an hour and the silence creeps in:
 
 ```text
 $ /music
-▶ Marete Hodenu (Unplugged) — Vasishta N. Simha
+▶ Bohemian Rhapsody — Queen
 ```
 
 It just… picks something. Daily Mix. Heavy Rotation. Whatever Apple thinks you'll like. Same thing Siri does, except you didn't have to take your hands off the keyboard.
 
-When the homie sends you a YouTube link:
+When you want Claude on the same wavelength:
 
 ```text
 $ /music claude
-📺 Opening Claude live stream — https://youtu.be/AUQKjgKQF7w
+🎙️ Claude FM → https://youtu.be/AUQKjgKQF7w
 ```
 
-When you need volume right now:
+When you need volume *right now*:
 
 ```text
 $ /music up
 🔊 Volume 90%.
+```
+
+When inspiration hits:
+
+```text
+$ /music queen
+🔍 Searching Apple Music for "queen"... hit play if it doesn't auto-start.
 ```
 
 ---
@@ -100,12 +123,34 @@ That's it. Open Claude Code, type `/music`, you're listening to something.
 
 ---
 
+## 🎛️ configure your own streams
+
+Out of the box you get `/music claude`, `/music lofi`, `/music coding`, `/music jazz`. To override any of them or add your own, drop a config file at `~/.config/claude-music/streams.conf`:
+
+```ini
+# ~/.config/claude-music/streams.conf
+
+# repoint Claude FM to a different stream
+claude=https://www.youtube.com/watch?v=YOUR_STREAM_ID
+
+# add as many as you want
+study=https://www.youtube.com/watch?v=bP9gMpl1gyQ
+rain=https://www.youtube.com/watch?v=mPZkdNFkNps
+synthwave=https://www.youtube.com/watch?v=MVPTGNGiI-4
+```
+
+Now `/music study`, `/music rain`, `/music synthwave` all just work. There's an example file at `config/streams.conf.example` you can copy.
+
+User config wins; built-in defaults fill in anything you don't override; **anything not matched as a stream falls through to playlist-or-search** so you don't lose any other commands.
+
+---
+
 ## optional: now-playing in your status bar
 
 A tiny script ships with the plugin that prints the current track. Drop it into Claude Code's status line and you get this:
 
 ```text
-⬆ /gsd:update │ Claude │ my-project │ ♪ Heat Waves — Glass Animals
+~/projects/landing-page │ ♪ Bohemian Rhapsody — Queen
 ```
 
 Edit `~/.claude/settings.json`:
@@ -119,7 +164,7 @@ Edit `~/.claude/settings.json`:
 }
 ```
 
-Already have a status line? Compose them. There's a wrapper script (`statusline/now-playing.sh`) that's safe to call standalone and emits nothing when nothing's playing — easy to glue onto whatever you already have running.
+Already running another status line? The script is safe to call standalone, emits nothing when nothing's playing, and is easy to chain with whatever you already have.
 
 ---
 
@@ -141,7 +186,7 @@ I'd rather ship 9 things that work than 11 things where 2 lie.
 - [ ] **YouTube Music** support
 - [ ] **Linux** via `playerctl` (MPRIS), **Windows** via PowerShell SMTC
 - [ ] **`/music match <vibe>`** — describe a mood ("brooding cyberpunk", "chai on a rainy morning") → small LLM call → Apple Music search → plays. The "Claude" in claude-music actually doing something Claude-y.
-- [ ] **Hooks** — auto-pause when Claude finishes a long task, auto-play "focus" when `/gsd:execute-phase` starts
+- [ ] **Hooks** — auto-pause when Claude finishes a long task, auto-play "focus" when an `/execute` slash command starts
 - [ ] **Pomodoro mode** — `/music pomo` plays for 25, pauses for 5
 
 PRs warmly welcomed. Especially Linux/Windows/Spotify.
@@ -150,12 +195,13 @@ PRs warmly welcomed. Especially Linux/Windows/Spotify.
 
 ## under the hood
 
-It's three files. That's it.
+It's four files. That's it.
 
 ```text
 claude-music/
 ├── .claude-plugin/plugin.json     ← plugin manifest
 ├── commands/music.md              ← the slash command (routes args)
+├── config/streams.conf.example    ← copy to ~/.config/claude-music/streams.conf
 └── statusline/now-playing.sh      ← optional now-playing script
 ```
 
