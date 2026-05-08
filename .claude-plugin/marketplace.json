@@ -1,0 +1,24 @@
+{
+  "name": "claude-music",
+  "owner": {
+    "name": "Prajwal P",
+    "url": "https://github.com/prajwalgajakesari"
+  },
+  "plugins": [
+    {
+      "name": "claude-music",
+      "source": ".",
+      "description": "Control Apple Music and play Claude FM (live coding stream) from inside Claude Code. /music play, pause, skip, search, configurable stream shortcuts.",
+      "version": "0.1.0",
+      "homepage": "https://github.com/prajwalgajakesari/claude-music",
+      "license": "MIT",
+      "keywords": [
+        "music",
+        "apple-music",
+        "claude-fm",
+        "macos",
+        "applescript"
+      ]
+    }
+  ]
+}
