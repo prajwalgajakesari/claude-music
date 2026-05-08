@@ -8,8 +8,8 @@
     {
       "name": "claude-music",
       "source": {
-        "source": "github",
-        "repo": "prajwalgajakesari/claude-music"
+        "source": "url",
+        "url": "https://github.com/prajwalgajakesari/claude-music.git"
       },
       "description": "Control Apple Music and play Claude FM (live coding stream) from inside Claude Code. /music play, pause, skip, search, configurable stream shortcuts.",
       "version": "0.1.0",
